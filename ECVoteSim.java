@@ -4,6 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 class ECVoteSim {
+
+  static void printFinalResults(String candidateWithMostVotes, Integer candidateWithMostVotesTotal, String candidateWithLeastVotes, Integer candidateWithLeastVotesTotal) {
+  // printFinalResults()
+    System.out.println("\n================== RESULTS ==================\n");
+
+    // If candidateWithMostVotes does not have at least 270 electoral votes, then they have
+    // not won the presidency, and the vote will be sent to the House of Rep.
+    if (candidateWithMostVotesTotal >= 270) {
+      System.out.println(candidateWithMostVotes + " won the presidency with " + candidateWithMostVotesTotal + " votes!");
+    } else {
+      System.out.println("Neither candidate has obtained 270 votes! The House of Representatives will vote on the next president.");
+      System.out.println(candidateWithMostVotes + " came in top with " + candidateWithMostVotesTotal + " votes!");
+    }
+
+    System.out.println(candidateWithLeastVotes + " got " + candidateWithLeastVotesTotal + " votes.");
+
+    System.out.println("\n===========================================");
+  }
+
   public static void main(String[] args) {
 
     // Lines 9-43 parses the contents from the .CSV file, and adds them into the electoralCollegeMap hashmap
@@ -54,7 +73,7 @@ class ECVoteSim {
 
     System.out.println(
         "\nFor the following states, enter who won using 1 (" + candidateOne + ") or 2 (" + candidateTwo + ").");
-    System.out.println("***For example: Who won Texas (40 E.C. votes): 1***");
+    System.out.println("***For example: Who won Texas (40 electoral votes): 1***");
     System.out.println("\n==========================================\n");
 
     candidateVoteCount.put(candidateOne, 0);
@@ -66,7 +85,7 @@ class ECVoteSim {
 
       Boolean getUserInput = true;
       while (getUserInput) {
-        System.out.print("[" + stateCount + "] Who won " + state.getKey() + " (" + state.getValue() + " E.C. votes): ");
+        System.out.print("[" + stateCount + "] Who won " + state.getKey() + " (" + state.getValue() + " electoral votes): ");
 
         Integer choice = getInput.nextInt();
 
@@ -113,20 +132,8 @@ class ECVoteSim {
       candidateWithLeastVotesTotal = candidateVoteCount.get(candidateOne);
     }
 
-    System.out.println("\n================== RESULTS ==================\n");
-
-    // If candidateWithMostVotes does not have at least 270 electoral votes, then they have
-    // not won the presidency, and the vote will be sent to the House of Rep.
-    if (candidateWithMostVotesTotal >= 270) {
-      System.out.println(candidateWithMostVotes + " won the presidency with " + candidateWithMostVotesTotal + " votes!");
-    } else {
-      System.out.println("Neither candidate has obtained 270 votes! The House of Representatives will vote on the next president.");
-      System.out.println(candidateWithMostVotes + " came in top with " + candidateWithMostVotesTotal + " votes!");
-    }
-
-    System.out.println(candidateWithLeastVotes + " got " + candidateWithLeastVotesTotal + " votes.");
-
-    System.out.println("\n===========================================");
-
+    // Prints final result
+    printFinalResults(candidateWithMostVotes, candidateWithMostVotesTotal, candidateWithLeastVotes, candidateWithLeastVotesTotal);
+    
   }
 }

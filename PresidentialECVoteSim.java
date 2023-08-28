@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
 
-class ECVoteSim {
+class PresidentialECVoteSim {
 
   static void printFinalResults(String candidateWithMostVotes, Integer candidateWithMostVotesTotal, String candidateWithLeastVotes, Integer candidateWithLeastVotesTotal) {
   // printFinalResults()

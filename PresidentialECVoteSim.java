@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 
 class PresidentialECVoteSim {
@@ -87,24 +88,31 @@ class PresidentialECVoteSim {
       while (getUserInput) {
         System.out.print("[" + stateCount + "] Who won " + state.getKey() + " (" + state.getValue() + " electoral votes): ");
 
-        Integer choice = getInput.nextInt();
-
-        // if the user inputs 1, then add the current state's electoral vote into
-        // the candidate's value in the electoralCollegeMap hashmap
-        if (choice == 1) {
-          candidateVoteCount.replace(candidateOne, candidateVoteCount.get(candidateOne) + state.getValue());
-          getUserInput = false;
-        // if the user inputs 2, then add the current state's electoral vote into
-        // the candidate's value in the electoralCollegeMap hashmap
-        } else if (choice == 2) {
-          candidateVoteCount.replace(candidateTwo, candidateVoteCount.get(candidateTwo) + state.getValue());
-          getUserInput = false;
-        // if the user enters an integer other than 1 or 2, then the system will ask for
-        // the user's input again
-        } else {
-          System.out.println("\nTry again.");
+        try {
+          Integer choice = getInput.nextInt();
+          // if the user inputs 1, then add the current state's electoral vote into
+          // the candidate's value in the electoralCollegeMap hashmap
+          if (choice == 1) {
+            candidateVoteCount.replace(candidateOne, candidateVoteCount.get(candidateOne) + state.getValue());
+            getUserInput = false;
+          // if the user inputs 2, then add the current state's electoral vote into
+          // the candidate's value in the electoralCollegeMap hashmap
+          } else if (choice == 2) {
+            candidateVoteCount.replace(candidateTwo, candidateVoteCount.get(candidateTwo) + state.getValue());
+            getUserInput = false;
+          }
+          else {
+            System.out.println("\nTry again.");
+            getUserInput = true;
+          }
+        } catch (Exception e) {
+          // if the user enters an integer other than 1 or 2, then the system will ask for
+          // the user's input again
+          // System.out.println("\nTry again.");
+          System.out.println("\nInvalid input (Non-interger)!\nTry again.\n");
+          getInput.nextLine();
           getUserInput = true;
-        }
+        }  
       }
       stateCount++;
     }

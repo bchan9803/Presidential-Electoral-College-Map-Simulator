@@ -109,7 +109,7 @@ class PresidentialECVoteSim {
           // if the user enters an integer other than 1 or 2, then the system will ask for
           // the user's input again
           // System.out.println("\nTry again.");
-          System.out.println("\nInvalid input (Non-interger)!\nTry again.\n");
+          System.out.println("\nInvalid input (non-interger)!\nTry again.\n");
           getInput.nextLine();
           getUserInput = true;
         }  
